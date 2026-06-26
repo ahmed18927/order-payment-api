@@ -35,15 +35,6 @@ class OrderService
                 'total_amount' => $totalAmount,
             ]);
 
-            // foreach ($data['items'] as $item) {
-            //     $order->items()->create([
-            //         'product_name' => $item['product_name'],
-            //         'quantity'     => $item['quantity'],
-            //         'price'        => $item['price'],
-            //         'subtotal'     => $item['quantity'] * $item['price'],
-            //     ]);
-            // }
-
             $order->items()->createMany(
     collect($data['items'])
         ->map(fn ($item) => [

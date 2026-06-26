@@ -14,8 +14,7 @@ class CreditCardGateway implements PaymentGatewayInterface
 
     public function process(array $data): array
     {
-        // Simulated Credit Card processing
-        // In production: integrate with Stripe/Braintree SDK here
+
         $success = rand(0, 9) !== 0;
 
         return [

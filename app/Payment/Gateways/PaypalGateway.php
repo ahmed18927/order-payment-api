@@ -14,9 +14,8 @@ class PaypalGateway implements PaymentGatewayInterface
 
     public function process(array $data): array
     {
-        // Simulated PayPal API call
-        // In production: integrate with PayPal SDK here
-        $success = rand(0, 9) !== 0; // 90% success rate simulation
+       
+        $success = rand(0, 9) !== 0; 
 
         return [
             'status'         => $success ? 'successful' : 'failed',
