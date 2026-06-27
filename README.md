@@ -36,9 +36,9 @@ Business rules enforced by the application:
 
 | Requirement | Version |
 |---|---|
-| PHP | ^8.3 |
+| PHP | 8.5 |
 | Composer | Latest stable |
-| Database | SQLite (default) or MySQL/PostgreSQL |
+| Database | MySQL |
 | Laravel | ^13.8 |
 
 ---
