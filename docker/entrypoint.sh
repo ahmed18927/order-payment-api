@@ -1,23 +1,31 @@
-#!/bin/bash
+#!/bin/sh
 
-# Copy .env if not exists
+set -e
+
 if [ ! -f /var/www/.env ]; then
     cp /var/www/.env.docker /var/www/.env
 fi
 
-# Generate app key if empty
-php artisan key:generate --no-interaction --force
+chmod -R 775 /var/www/storage
+chmod -R 775 /var/www/bootstrap/cache
 
-# Generate JWT secret if empty
+composer dump-autoload --optimize
+
+php artisan key:generate --no-interaction --force
 php artisan jwt:secret --no-interaction --force
 
-# Wait for DB then migrate
 echo "Waiting for database..."
-sleep 5
-php artisan migrate --force --no-interaction
 
-# Clear caches
+until php artisan migrate --force --no-interaction >/dev/null 2>&1; do
+    echo "Database is unavailable - retrying in 2 seconds..."
+    sleep 2
+done
+
+echo "Database is ready."
+
 php artisan config:clear
 php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
 
-php-fpm
+exec php-fpm
