@@ -21,7 +21,8 @@ A Laravel REST API for managing orders and payments with JWT authentication and 
 ```bash
 git clone https://github.com/ahmed18927/order-payment-api.git
 cd order-payment-api
-docker compose up -d --build
+docker compose build --no-cache
+docker compose up -d
 ```
 
 The API will be available at `http://localhost:8000`.
